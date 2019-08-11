@@ -1,5 +1,5 @@
 var app = require("express");
-var path = require("path"); 
+
 
 var app = express();
 
@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //routes, require the different routes
-require("./routing/apiRoutes")(app);
-require("./routing/htmlRoutes")(app);
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
 //listen to the port
 app.listen(PORT, function() {
