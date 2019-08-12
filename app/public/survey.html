@@ -392,7 +392,7 @@ js that will allow us to post the responses to the api/friends route; (url route
                       $("#q10").val()
                     ]
                   };
-          
+                  console.log(userData);
                   // AJAX post the data to the friends API.
                   $.post("/api/friends", userData, function(data) {
           
