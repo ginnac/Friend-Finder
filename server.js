@@ -1,4 +1,4 @@
-var app = require("express");
+var express = require("express");
 
 
 var app = express();
@@ -11,7 +11,7 @@ var PORT = process.env.PORT || 9000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//routes, require the different routes
+//routes, require the different js files (routes files)
 require("./app/routing/apiRoutes")(app);
 require("./app/routing/htmlRoutes")(app);
 
