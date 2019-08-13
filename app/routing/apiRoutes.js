@@ -18,43 +18,48 @@ app.get("/api/friends", function(req,res){
 
 app.post("/api/friends",function(req,res){
 
-    friends.push(req.body);  
+    friends.push(req.body);
+   
 
    //logic to find friend
- 
-   var differenceArray = [];
-   var friendsList =  friends.length - 1;
-   var totalDifference = 0;
-   
-   for (var i=0;i<friendsList.length;i++){
+    var friendsToCompareList =  friends.length - 1;
+    var differenceArray = [];
+    var totalDifference = 0;
+
+   for (var i=0;i<friendsToCompareList;i++){
     
      var score = friends[i].scores;
-     var yourScore = friends[friendsList].scores;
-     function sum(){
-     totalDifference = 0; 
-     for (var x=0; x < score.length; x++){
+     var yourScore = req.body.scores;
 
+     //function sum(){
+     totalDifference = 0; 
+     for (var x=0; x<score.length; x++){
+        friendScore = parseInt(score[x]);
+        userScore = parseInt(yourScore[x]);
    
-        if (!score[x]===yourScore[x]){
-            var difference = 0;
-            difference = score[x] - yourScore[x]
-            difference = Math.abs(difference);
-            totalDifference += difference
+        if (friendScore > userScore ||  userScore> friendScore){
+    
+            totalDifference += Math.abs(friendScore - userScore);
 
 
         }  
 
-        else{ totalDifference += 0}
+        else{ 
+            totalDifference += 0;
+        }
     
      };
 
-     return totalDifference;
-    };
-
     differenceArray.push(totalDifference);
+     console.log(differenceArray);
 
    };
-   res.json(friends[le]);
+
+   var min = Math.min.apply(Math, differenceArray);
+   var index = differenceArray.indexOf(min);
+
+  
+   res.json(friends[index]);
     
 });
 
